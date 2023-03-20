@@ -1,3 +1,3 @@
 # Security Policy
 
-> Inspiration source <https://www.djangoproject.com/security/>.
+> See :point_right: <https://www.djangoproject.com/security/> for inspiration.
