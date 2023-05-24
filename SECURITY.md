@@ -6,7 +6,7 @@ Most normal bugs :bug: can be reported by opening a [GitHub issue](https://githu
 
 Instead, if you believe you’ve found something that has security implications, please send a description of the issue via email to **[jv-conseil@proton.me]**.
 
-Mail sent to **[jv-conseil@proton.me]** can be **encrypted :lock_with_ink_pen:** with our [PGP public key](./publickey.jv-conseil%40proton.me-58e3b2ceb20369bdaec0d106a12fedf3481a6b1f.asc) :key:
+Mail sent to **[jv-conseil@proton.me]** can be **encrypted :lock_with_ink_pen:** with our [PGP public key :key:]
 
 Once you’ve submitted an issue via email, you should receive an acknowledgment from us, and depending on the action to be taken, you may receive further followup emails.
 
@@ -15,3 +15,4 @@ Once you’ve submitted an issue via email, you should receive an acknowledgment
 <!-- links -->
 
 [jv-conseil@proton.me]: <mailto:jv-conseil@proton.me?subject=%5BSECURITY%20REPORT%5D%20Issue%20description...>
+[PGP public key :key:]: <./publickey.jv-conseil%40proton.me-58e3b2ceb20369bdaec0d106a12fedf3481a6b1f.asc>
