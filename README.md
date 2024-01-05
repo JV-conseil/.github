@@ -1,1 +1,1 @@
-https://raw.githubusercontent.com/JV-conseil/JV-conseil/main/README.md
+https://github.com/JV-conseil/JV-conseil/blob/c35400da399e5ee9eb779203d8222c0db2a34e6a/README.md
