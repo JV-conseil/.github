@@ -1,0 +1,24 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "type": "shell",
+  "presentation": {
+    "panel": "new",
+    "focus": true,
+    "revealProblems": "onProblem",
+  },
+  "problemMatcher": [],
+  "tasks": [
+    {
+      "label": "copy git hooks",
+      "command": "./.git-hooks/git_hooks_copy.sh",
+      "detail": "Copy Git Hooks to ./.git/hooks"
+    },
+    {
+      "label": "git log GH issues",
+      "command": "./.git-hooks/git_log_gh_issues_ref.sh",
+      "detail": "Are your referencing GitHub issues in your commits?"
+    },
+  ]
+}
