@@ -12,12 +12,12 @@
   "tasks": [
     {
       "label": "copy git hooks",
-      "command": "./.git-hooks/git_hooks_copy.sh",
+      "command": ". ./GIT_HOOKS/install.sh && _jvcl_::git_hooks_copy $@",
       "detail": "Copy Git Hooks to ./.git/hooks"
     },
     {
       "label": "git log GH issues",
-      "command": "./.git-hooks/git_log_gh_issues_ref.sh",
+      "command": ". ./GIT_HOOKS/install.sh && _jvcl_::git_log_gh_issues_ref",
       "detail": "Are your referencing GitHub issues in your commits?"
     },
   ]
