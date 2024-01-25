@@ -12,7 +12,7 @@
   "tasks": [
     {
       "label": "install Git hooks",
-      "command": ". ./GIT_HOOKS/install.sh && _jvcl_::git_hooks_copy $@",
+      "command": ". ./GIT_HOOKS/install.sh && _jvcl_::git_hooks_curl $@",
       "detail": "install Git hooks"
     },
     {

@@ -19,6 +19,12 @@ In this article, we’ll start with a conceptual overview of how Git hooks work.
 
 _source: <https://www.atlassian.com/git/tutorials/git-hooks>_
 
+## Install
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JV-conseil/.github/main/GIT_HOOKS/install.sh)"
+```
+
 ## Documentation 📚
 
 - [Git hooks](https://www.atlassian.com/git/tutorials/git-hooks) - atlassian.com
