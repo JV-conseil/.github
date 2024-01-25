@@ -134,8 +134,10 @@ EOF
       fi
     fi
 
-    echo -e "\n${_local}\n" &&
-      ls -FGlAhp --color=auto "${_local}"
+    if [[ "${DEBUG}" -gt 0 ]]; then
+      echo -e "\n${_local}\n" &&
+        ls -FGlAhp --color=auto "${_local}"
+    fi
 
     echo -e "\nThe install has completed successfuly!\n"
   ) || echo -e "\nERROR: The install did not complete successfuly\n"
