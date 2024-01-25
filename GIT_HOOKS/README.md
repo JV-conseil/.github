@@ -21,7 +21,7 @@ _source: <https://www.atlassian.com/git/tutorials/git-hooks>_
 ## Install
 
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JV-conseil/.github/main/GIT_HOOKS/install.sh)"
+/opt/homebrew/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JV-conseil/.github/main/GIT_HOOKS/install.sh)"
 ```
 
 ## Documentation 📚
