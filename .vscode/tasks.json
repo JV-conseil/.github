@@ -11,14 +11,9 @@
   "problemMatcher": [],
   "tasks": [
     {
-      "label": "install Git hooks",
-      "command": ". ./GIT_HOOKS/install.sh && _jvcl_::git_hooks_curl $@",
-      "detail": "install Git hooks"
-    },
-    {
-      "label": "git log GH issues",
-      "command": ". ./GIT_HOOKS/install.sh && _jvcl_::git_log_gh_issues_ref",
-      "detail": "Are your referencing GitHub issues in your commits?"
-    },
+      "label": "Install Git hooks",
+      "command": "./GIT_HOOKS/install.sh",
+      "detail": "Install Git hooks"
+    }
   ]
 }

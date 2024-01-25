@@ -13,6 +13,8 @@
 set -Eeou pipefail
 shopt -s failglob
 
+declare -i DEBUG=0
+
 _jvcl_::cmd_find_git_repo() {
   _cmd_find_git_repo=(
     "find" "${HOME}/GitHub" "-type" "d" "-path" "*/GitHub/*/*/.git"
@@ -47,7 +49,7 @@ _jvcl_::select_git_repo() {
     ls -FGlAhp --color=auto
 }
 
-_jvcl_::git_log_gh_issues_ref() {
+_jvcl_::git_log_gh_issues_references() {
   cat <<EOF
 
 
@@ -57,18 +59,20 @@ EOF
   while true; do
     _jvcl_::select_git_repo
     printf "\nCommits found\n\n"
-    # git log --all --perl-regexp \
-    #   --grep='(?<!Merge pull request |&)#\d+'
-    git log --all --perl-regexp \
-      --grep='(?<!Merge pull request |&)#\d+' \
-      --author='^((?!JV-conseil|JV conseil).*)$'
+    if [[ "${DEBUG}" -gt 0 ]]; then
+      git log --all --perl-regexp \
+        --grep='(?<!Merge pull request |&)#\d+'
+    else
+      git log --all --perl-regexp \
+        --grep='(?<!Merge pull request |&)#\d+' \
+        --author='^((?!JV-conseil|JV conseil).*)$'
+    fi
   done
 }
 
 _jvcl_::git_hooks_curl() {
   local _hook="${1:-"commit-msg"}"
   local _local="./.git/hooks"
-  local _prior_hook
   local _remote="https://raw.githubusercontent.com/JV-conseil/.github/main/GIT_HOOKS"
 
   cat <<EOF
@@ -94,6 +98,7 @@ EOF
     _jvcl_::select_git_repo
   fi
 
+  local _prior_hook=""
   if [[ -f "${_local}/${_hook}" ]]; then
     _prior_hook="${_local}/${_hook}.$(date +'%Y%m%d')"
     mv "${_local}/${_hook}" "${_prior_hook}"
@@ -112,8 +117,13 @@ EOF
   fi
 
   (
-    curl -fsSL "${_remote}/${_hook}.py" -o "${_local}/${_hook}" &&
-      chmod +x "${_local}/${_hook}"
+    if [[ "${DEBUG}" -gt 0 ]]; then
+      cp -pv "./GIT_HOOKS/${_hook}.py" "${_local}/${_hook}"
+    else
+      curl -fsSL "${_remote}/${_hook}.py" -o "${_local}/${_hook}"
+    fi
+
+    chmod +x "${_local}/${_hook}"
 
     if [[ -f "${_prior_hook}" ]]; then
       # To just test whether two files are the same, use cmp -s
@@ -130,7 +140,7 @@ EOF
     echo -e "\nThe install has completed successfuly!\n"
   ) || echo -e "\nERROR: The install did not complete successfuly\n"
 
-  _jvcl_::git_log_gh_issues_ref
+  _jvcl_::git_log_gh_issues_references
 }
 
 # If the script is sourced, return will return to the parent (of course), but if the script is executed, return will produce an error which gets hidden, and the script will continue execution.
