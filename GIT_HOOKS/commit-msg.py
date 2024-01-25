@@ -54,7 +54,7 @@ with open(commit["commit_msg_filepath"], "r") as f:
     issue_tag = re.compile(r"#[1-9]\d{,2}(?!\d)")
     if not re.match(issue_tag, content):
         print(
-            f"""Dear {commit["user"]}
+            f"""Hi {commit["user"]}
 
 Your commit message must contains at least one reference
 to a GitHub issue e.g.:
