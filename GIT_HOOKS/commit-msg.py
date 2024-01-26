@@ -42,8 +42,8 @@ for key, command in cmd.items():
 # Check the parameters
 # print(commit)
 
-if blake2s(commit["user"].encode(), digest_size=5).hexdigest() in ("b623907a87",):
-    sys.exit(0)
+# if blake2s(commit["user"].encode(), digest_size=5).hexdigest() in ("b623907a87",):
+#     sys.exit(0)
 
 # Read commit message
 with open(commit["commit_msg_filepath"], "r") as f:
@@ -60,12 +60,16 @@ Your commit message must contains at least one reference
 to a GitHub issue e.g.:
 
 #123 Fix a Bug 🪲
+#123 #321 Fix a Bug 🪲
 
 On GitHub Desktop in the commit Summary field, typing # (hashtag)
 will trigger suggestions of issues to reference.
 
 You can also pick one of the issues on GitHub
 {commit['github'].replace('.git', '/issues')}
+
+If no issue match your commit maybe creating one would be a
+good idea 😉
 
 Cheers 👋
 """
