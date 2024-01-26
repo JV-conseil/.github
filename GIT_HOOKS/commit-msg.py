@@ -40,7 +40,7 @@ for key, command in cmd.items():
     commit[key] = value
 
 # Check the parameters
-print(commit)
+# print(commit)
 
 # if blake2s(commit["user"].encode(), digest_size=5).hexdigest() in ("b623907a87",):
 #     sys.exit(0)
