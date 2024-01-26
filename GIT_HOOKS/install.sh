@@ -77,9 +77,7 @@ _jvcl_::git_log_gh_issues_references() {
       --author='^((?!JV-conseil|JV conseil).*)$'
   fi
 
-  while true; do
-    _jvcl_::git_log_gh_issues_references
-  done
+  _jvcl_::git_log_gh_issues_references
 }
 
 # shellcheck disable=SC2120
