@@ -8,7 +8,7 @@
 #                 All rights reserved
 #
 # To test localy
-# /bin/bash -c "${HOME}/GitHub/JV-conseil/.github/SHELL/install.sh"
+# /bin/bash -c "${HOME}/GitHub/JV-conseil/.github/SETUP/install.sh"
 #
 #====================================================
 set -Eeou pipefail
