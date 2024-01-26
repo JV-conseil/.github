@@ -30,6 +30,8 @@ _jvcl_::install_hombrew() {
 _jvcl_::install_bash() {
   printf "\nInstalling Bash..."
 
+  echo $((${BASH_VERSION:0:1}))
+
   if [ $((${BASH_VERSION:0:1})) -ge 5 ]; then
     printf " Bash is already installed %s" "$(bash --version | head -1)"
     return
