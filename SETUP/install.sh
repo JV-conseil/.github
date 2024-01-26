@@ -28,25 +28,22 @@ _jvcl_::install_hombrew() {
 }
 
 _jvcl_::install_bash() {
-  local _cmd
   printf "\nInstalling Bash..."
 
-  _cmd="$(brew info bash | head -1 | grep -o -E '\d+' | head -1)"
-  printf " Bash v%d is already installed" "${_cmd}"
-  if [[ $((_cmd + 0)) -ge 5 ]]; then
-    printf " Bash v%d is already installed" "${_cmd}"
-    # return
+  if brew info bash &>/dev/null || :; then
+    printf " Bash is already installed %s" "$(brew info bash | head -1)"
+    return
   fi
 
   echo "brew install bash"
 
   if ! grep -F -q "/opt/homebrew/bin/bash" "/etc/shells"; then
     printf "\nAdding /opt/homebrew/bin/bash to /etc/shells...\n"
-    # echo "/opt/homebrew/bin/bash" | sudo tee -a "/etc/shells" >/dev/null
+    echo "/opt/homebrew/bin/bash" | sudo tee -a "/etc/shells" >/dev/null
   fi
 
   printf "\nSetting default shell to Bash...\n"
-  echo "chsh -s /opt/homebrew/bin/bash"
+  chsh -s "/opt/homebrew/bin/bash"
 
   printf "\nSHELL=%s\n" "${SHELL}"
   bash --version | head -1
@@ -58,12 +55,12 @@ _jvcl_::install_from_brewfile() {
   printf "\nInstalling from Brewfile..."
 
   if [[ -f "${brewfile}" ]]; then
-    printf " There is a Brewfile already"
-    # return
+    printf " Brewfile is already installed"
+    return
   fi
 
-  curl -fsSL "${_remote}/Brewfile" -o "${brewfile}.test"
-  echo "brew bundle install --file=${brewfile}"
+  curl -fsSL "${_remote}/Brewfile" -o "${brewfile}"
+  brew bundle install --file="${brewfile}"
 }
 
 _jvcl_::main() {
