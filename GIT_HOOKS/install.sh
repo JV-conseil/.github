@@ -7,6 +7,9 @@
 # copyright     : Copyright (c) 2019-2024 JV-conseil
 #                 All rights reserved
 #
+# To test localy
+# /bin/bash -c "${HOME}/GitHub/JV-conseil/.github/GIT_HOOKS/install.sh"
+#
 # shellcheck disable=SC2317
 #
 #====================================================
@@ -14,6 +17,21 @@ set -Eeou pipefail
 shopt -s failglob
 
 declare -i DEBUG=0
+
+cd() {
+  builtin cd "$@" || return
+  printf "\n%s\n\n" "$@"
+  ls -FGlAhp --color=auto "$@"
+}
+
+# Usage: throbber & your_process ; kill %-1
+throbber() {
+  printf "Please wait..."
+  while true; do
+    printf "."
+    sleep .3
+  done
+}
 
 _jvcl_::ask() {
   local _prompt=${1:-"Houston Do You Copy"}
@@ -38,10 +56,11 @@ _jvcl_::cache_git_repo_to_array() {
   _jvcl_::cmd_find_git_repo
   _cmd_find_git_repo+=("-print0")
 
-  printf "\nPlease wait...\n\n"
+  throbber &
   readarray -d '' _cache_git_repo_to_array < <(
     "${_cmd_find_git_repo[@]}"
   )
+  kill %-1
 }
 
 _jvcl_::select_git_repo() {
@@ -55,9 +74,10 @@ _jvcl_::select_git_repo() {
   if [[ ! -d "${_repo}" ]]; then
     return 1
   fi
-  cd "${_repo}" &&
-    printf "\n%s\n\n" "${_repo}" &&
-    ls -FGlAhp --color=auto "${_repo}"
+  # cd "${_repo}" &&
+  #   printf "\n%s\n\n" "${_repo}" &&
+  #   ls -FGlAhp --color=auto "${_repo}"
+  cd "${_repo}"
 }
 
 _jvcl_::git_log_gh_issues_references() {
@@ -96,18 +116,6 @@ _jvcl_::git_hooks_curl() {
   if [[ -f "${_local}/${_hook}" ]]; then
     _prior_hook="${_local}/${_hook}.$(date +'%Y%m%d')"
     mv "${_local}/${_hook}" "${_prior_hook}"
-
-    # echo -e "\nWARNING: This folder has already ${_local}/${_hook}\n\n"
-
-    # cat "${_local}/${_hook}"
-    # echo
-
-    # echo
-    # read -e -r -p "Do you want to overwrite it? [y/N]" -n 1
-    # if [[ ! "${REPLY}" =~ ^[Yy]$ ]]; then
-    #   echo -e "\n\nEXIT: The install was aborted\n"
-    #   return
-    # fi
   fi
 
   (
@@ -124,7 +132,7 @@ _jvcl_::git_hooks_curl() {
       if cmp -s "${_local}/${_hook}" "${_prior_hook}"; then
         rm "${_prior_hook}"
       else
-        printf "\nAn older hook already installed has been save as %s\n\n" "${_prior_hook}"
+        printf "\nAn older hook already installed has been saved\n%s\n\n" "${_prior_hook}"
         if [[ "${DEBUG}" -gt 0 ]]; then
           cat "${_prior_hook}"
           echo
@@ -147,6 +155,19 @@ _jvcl_::git_hooks_curl() {
   fi
 }
 
+_jvcl_::install_all() {
+  local _repo
+
+  if ! _jvcl_::ask "Do you want to install in all your repos"; then
+    return
+  fi
+
+  for _repo in "${_cache_git_repo_to_array[@]}"; do
+    cd "${_repo}"
+    printf "\nDISABLED: Will run _jvcl_::git_hooks_curl...\n"
+  done
+}
+
 _jvcl_::main() {
   local _remote="https://raw.githubusercontent.com/JV-conseil/.github/main/GIT_HOOKS"
 
@@ -166,6 +187,7 @@ EOF
 
   _jvcl_::cache_git_repo_to_array
   _jvcl_::git_hooks_curl
+  _jvcl_::install_all
   _jvcl_::git_log_gh_issues_references
 }
 
