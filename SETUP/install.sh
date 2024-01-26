@@ -32,7 +32,7 @@ _jvcl_::install_bash() {
   printf "\nInstalling Bash..."
 
   _cmd="$(brew info bash | head -1 | grep -o -E '\d+' | head -1)"
-  if [[ $((_cmd)) -ge 5 ]]; then
+  if [[ $((_cmd + 0)) -ge 5 ]]; then
     printf " Bash v%d is already installed" "${_cmd}"
     # return
   fi
