@@ -3,7 +3,6 @@
 #
 # author        : JV-conseil
 # credits       : JV-conseil
-# licence       : BSD 3-Clause License
 # copyright     : Copyright (c) 2019-2024 JV-conseil
 #                 All rights reserved
 #
