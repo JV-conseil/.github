@@ -24,8 +24,8 @@ cd() {
   ls -FGlAhp --color=auto "$@"
 }
 
-# Usage: throbber & your_process ; kill %-1
-throbber() {
+# Usage: _jvcl_::throbber & your_process ; kill %-1
+_jvcl_::throbber() {
   printf "Please wait..."
   while true; do
     printf "."
@@ -56,7 +56,7 @@ _jvcl_::cache_git_repo_to_array() {
   _jvcl_::cmd_find_git_repo
   _cmd_find_git_repo+=("-print0")
 
-  throbber &
+  _jvcl_::throbber &
   readarray -d '' _cache_git_repo_to_array < <(
     "${_cmd_find_git_repo[@]}"
   )

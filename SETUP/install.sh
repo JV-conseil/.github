@@ -14,6 +14,17 @@
 set -Eeou pipefail
 shopt -s failglob
 
+_jvcl_::ask() {
+  local _prompt=${1:-"Houston Do You Copy"}
+  # read -e -r -p "${_prompt}? [y/N]" -n 1
+  read -rep $'\n'"${_prompt}? [y/N]" -n 1
+  if [[ "${REPLY}" =~ ^[Yy]$ ]]; then
+    true
+  else
+    false
+  fi
+}
+
 _jvcl_::install_homebrew() {
   printf "\nInstalling Homebrew..."
 
@@ -57,29 +68,38 @@ _jvcl_::install_from_brewfile() {
     return
   fi
 
-  curl -fsSL "${_remote}/Brewfile" -o "${brewfile}"
-  brew bundle install --file="${brewfile}"
+  if ! _jvcl_::ask "Do you want to launch an install from a Brewfile (that may take a while)"; then
+    return
+  fi
+
+  (
+    curl -fsSL "${_remote}/Brewfile" -o "${brewfile}" &&
+      brew bundle install --file="${brewfile}"
+  ) || :
 }
 
 _jvcl_::install_terminal_profile() {
   local _file="Ubuntu.terminal"
   printf "\nInstalling Ubutu profile for Terminal..."
-  curl -fsSL "${_remote}/${_file}" -o "${_local}/${_file}" &&
-    open "${_local}/${_file}" &&
-    printf " In Terminal > Settings > Profiles > Ubuntu set the Font to Menlo Regular 16"
+  (
+    curl -fsSL "${_remote}/${_file}" -o "${_local}/${_file}" &&
+      open "${_local}/${_file}" &&
+      printf " In Terminal > Settings > Profiles > Ubuntu\n    1. Set Ubuntu as default profile\n    2. Set font to Menlo Regular 16"
+  ) || :
 }
 
 _jvcl_::diff_vscode_user_settings() {
   local _file="vscode.user.settings.json"
-  printf "\nComparing VS Code User Settings..."
-  curl -fsSL "${_remote}/${_file}" -o "${_local}/${_file}" &&
-    cmp "${HOME}/Library/Application Support/Code/User/settings.json" "${_local}/${_file}" &&
-    diff -y -W 120 "${HOME}/Library/Application Support/Code/User/settings.json" "${_local}/${_file}"
+  printf "\nComparing VS Code User Settings... Local <-> Remote\n"
+  (
+    curl -fsSL "${_remote}/${_file}" -o "${_local}/${_file}" &&
+      diff -wy --strip-trailing-cr "${HOME}/Library/Application Support/Code/User/settings.json" "${_local}/${_file}"
+  ) || :
 }
 
 _jvcl_::inspect_profile_files() {
-  local _file
-  printf "\nInspect Profiles files..."
+  local _file=""
+  printf "\nInspect Profiles files...\n"
   for _file in ".bashrc" ".bash_profile" ".nanorc" ".profile" ".zprofile"; do
     (printf "\n%s\n" "${_file}" && cat "${HOME}/${_file}") || :
   done
@@ -100,7 +120,7 @@ Copyright (c) 2019-2024 JV-conseil
 $(curl -fsSL "${_remote}/README.md")
 
 version
-25.01.2024
+27.01.2024
 
 EOF
 
@@ -110,7 +130,14 @@ EOF
   _jvcl_::install_from_brewfile
   _jvcl_::diff_vscode_user_settings
   _jvcl_::inspect_profile_files
-  echo
+  cat <<EOF
+
+
+
+Done 🎉
+
+
+EOF
 }
 
 # If the script is sourced, return will return to the parent (of course), but if the script is executed, return will produce an error which gets hidden, and the script will continue execution.
