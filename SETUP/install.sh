@@ -14,9 +14,7 @@
 set -Eeou pipefail
 shopt -s failglob
 
-declare -i DEBUG=0
-
-_jvcl_::install_hombrew() {
+_jvcl_::install_homebrew() {
   printf "\nInstalling Homebrew..."
 
   if type brew &>/dev/null; then
@@ -63,7 +61,18 @@ _jvcl_::install_from_brewfile() {
   brew bundle install --file="${brewfile}"
 }
 
+_jvcl_::install_terminal_profile() {
+  local _profile="Ubuntu.terminal"
+
+  printf "\nInstalling Ubutu profile for Terminal...\n"
+  curl -fsSL "${_remote}/${_profile}" -o "${HOME}/Downloads/${_profile}"
+
+  printf "\nIn Terminal > Settings > Profiles > Ubuntu set the Font to Menlo Regular 16\n"
+  open "${HOME}/Downloads/${_profile}"
+}
+
 _jvcl_::main() {
+  local -i DEBUG=0
   local _remote="https://raw.githubusercontent.com/JV-conseil/.github/main/SETUP"
 
   cat <<EOF
@@ -80,8 +89,9 @@ version
 
 EOF
 
-  _jvcl_::install_hombrew
+  _jvcl_::install_homebrew
   _jvcl_::install_bash
+  _jvcl_::install_terminal_profile
   _jvcl_::install_from_brewfile
   echo
 }
