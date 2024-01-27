@@ -93,7 +93,7 @@ How to migrate a Homebrew installation to a new location
 
     ```bash
     for file in ".bashrc" ".bash_profile" ".nanorc" ".profile" ".zprofile"; do
-        (echo -e "\n${file}\n" && cat "${file}") || :
+        (echo -e "\n${file}\n" && cat "${HOME}/${file}") || :
     done
     ```
 
