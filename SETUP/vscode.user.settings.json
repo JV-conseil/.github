@@ -1,0 +1,27 @@
+{
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+  },
+  "debug.terminal.clearBeforeReusing": true,
+  "editor.accessibilitySupport": "off",
+  "editor.formatOnSave": true,
+  "editor.renderWhitespace": "all",
+  "editor.tabCompletion": "on",
+  "files.associations": {
+    "*.plist": "xml",
+    ".env": "shellscript"
+  },
+  "security.workspace.trust.untrustedFiles": "open",
+  "shellcheck.executablePath": "/opt/homebrew/bin/shellcheck",
+  "shellformat.path": "/opt/homebrew/bin/shfmt",
+  "terminal.integrated.commandsToSkipShell": [
+    "workbench.panel.defaultLocation"
+  ],
+  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.scrollback": 1000000,
+  "terminal.integrated.shellIntegration.suggestEnabled": true,
+  "update.mode": "manual",
+  "window.zoomLevel": 1,
+  "workbench.colorTheme": "Default Dark+",
+  "workbench.panel.defaultLocation": "right"
+}

@@ -62,18 +62,33 @@ _jvcl_::install_from_brewfile() {
 }
 
 _jvcl_::install_terminal_profile() {
-  local _profile="Ubuntu.terminal"
+  local _file="Ubuntu.terminal"
+  printf "\nInstalling Ubutu profile for Terminal..."
+  curl -fsSL "${_remote}/${_file}" -o "${_local}/${_file}" &&
+    open "${_local}/${_file}" &&
+    printf " In Terminal > Settings > Profiles > Ubuntu set the Font to Menlo Regular 16"
+}
 
-  printf "\nInstalling Ubutu profile for Terminal...\n"
-  curl -fsSL "${_remote}/${_profile}" -o "${HOME}/Downloads/${_profile}"
+_jvcl_::diff_vscode_user_settings() {
+  local _file="vscode.user.settings.json"
+  printf "\nComparing VS Code User Settings..."
+  curl -fsSL "${_remote}/${_file}" -o "${_local}/${_file}" &&
+    cmp "${HOME}/Library/Application Support/Code/User/settings.json" "${_local}/${_file}" &&
+    diff -y -W 120 "${HOME}/Library/Application Support/Code/User/settings.json" "${_local}/${_file}"
+}
 
-  printf "\nIn Terminal > Settings > Profiles > Ubuntu set the Font to Menlo Regular 16\n"
-  open "${HOME}/Downloads/${_profile}"
+_jvcl_::inspect_profile_files() {
+  local _file
+  printf "\nInspect Profiles files..."
+  for _file in ".bashrc" ".bash_profile" ".nanorc" ".profile" ".zprofile"; do
+    (printf "\n%s\n" "${_file}" && cat "${HOME}/${_file}") || :
+  done
 }
 
 _jvcl_::main() {
   local -i DEBUG=0
   local _remote="https://raw.githubusercontent.com/JV-conseil/.github/main/SETUP"
+  local _local="${HOME}/Downloads"
 
   cat <<EOF
 
@@ -93,6 +108,8 @@ EOF
   _jvcl_::install_bash
   _jvcl_::install_terminal_profile
   _jvcl_::install_from_brewfile
+  _jvcl_::diff_vscode_user_settings
+  _jvcl_::inspect_profile_files
   echo
 }
 
