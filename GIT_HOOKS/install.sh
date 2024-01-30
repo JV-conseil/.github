@@ -92,8 +92,8 @@ _jvcl_::git_log_gh_issues_references() {
       --grep='(?<!Merge pull request |&)#\d+'
   else
     git log --all --perl-regexp \
-      --grep='(?<!Merge pull request |&)#\d+' \
-      --author='^((?!JV-conseil|JV conseil).*)$'
+      --grep='(?<!Merge pull request |&)#\d+'
+    #--author='^((?!JV-conseil|JV conseil).*)$'
   fi
 
   _jvcl_::git_log_gh_issues_references
