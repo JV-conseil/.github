@@ -50,7 +50,7 @@ with open(commit["commit_msg_filepath"], "r") as f:
     content = f.read()
 
     "1. Block commits with no reference to an issue in the commit message"
-    merge_branch = re.compile(r"^Merge branch ")
+    merge_branch = re.compile(r"^Merge branch .+$")
     if re.match(merge_branch, content):
         print(merge_branch)
         sys.exit(0)
