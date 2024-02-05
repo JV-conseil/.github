@@ -48,17 +48,19 @@ for key, command in cmd.items():
 # Read commit message
 with open(commit["commit_msg_filepath"], "r") as f:
     content = f.read()
-    print("content", content)
-    sys.exit(0)
 
-    "1. Block commits with no reference to an issue in the commit message"
-    merge_branch = re.compile(r"^Merge branch .+$")
+    # print("content", content)
+    # sys.exit(0)
+
+    """1. Allow automatic commit messages in the form
+    Merge branch 'dule-prod' of github.com:SDU-RIO-Explore/YERUN into dule-prod
+    """
+    merge_branch = re.compile(r"^Merge branch .+ of .+ into .+$")
     if re.match(merge_branch, content):
-        print(merge_branch)
+        # print(merge_branch)
         sys.exit(0)
 
     "2. Block commits with no reference to an issue in the commit message"
-
     issue_tag = re.compile(r"#[1-9]\d{,2}(?!\d)")
     if not re.match(issue_tag, content):
         print(
