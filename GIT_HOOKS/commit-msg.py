@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
 #
 # author        : JV-conseil
@@ -22,12 +22,14 @@ from hashlib import blake2s
 from itertools import zip_longest
 from subprocess import check_output
 
-# Collect the parameters
+"Collect the parameters"
+
 commit = ["hook", "commit_msg_filepath", "type", "hash", "branch", "github"]
 commit = zip_longest(commit, sys.argv, fillvalue="")
 commit = dict(commit)
 
-# Figure out which branch we're on
+"Figure out which branch we're on"
+
 cmd = {
     "branch": ("git", "symbolic-ref", "--short", "HEAD"),
     "github": ("git", "config", "--get", "remote.origin.url"),
@@ -39,30 +41,31 @@ for key, command in cmd.items():
         continue
     commit[key] = value
 
-# Check the parameters
+# "Check the parameters"
 # print(commit)
 
 # if blake2s(commit["user"].encode(), digest_size=5).hexdigest() in ("b623907a87",):
 #     sys.exit(0)
 
-# Read commit message
-with open(commit["commit_msg_filepath"], "r") as f:
-    content = f.read()
+"Read commit message"
 
-    # print("content", content)
+with open(commit["commit_msg_filepath"], "r") as f:
+    commit_msg = f.read()
+
+    # print("commit_msg", commit_msg)
     # sys.exit(0)
 
-    """1. Allow automatic commit messages in the form
+    """1. Allow automatic commit messages in the form of
     Merge branch 'dule-prod' of github.com:SDU-RIO-Explore/YERUN into dule-prod
     """
     merge_branch = re.compile(r"^Merge branch .+ of .+ into .+$")
-    if re.match(merge_branch, content):
+    if re.search(merge_branch, commit_msg):
         # print(merge_branch)
         sys.exit(0)
 
     "2. Block commits with no reference to an issue in the commit message"
     issue_tag = re.compile(r"#[1-9]\d{,2}(?!\d)")
-    if not re.match(issue_tag, content):
+    if not re.search(issue_tag, commit_msg):
         print(
             f"""Hi {commit["user"]}
 
