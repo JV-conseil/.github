@@ -85,6 +85,7 @@ _jvcl_::install_from_brewfile() {
 
   if [[ -f "${brewfile}" ]]; then
     printf " Brewfile is already installed\n"
+    brew list
     return
   fi
 
