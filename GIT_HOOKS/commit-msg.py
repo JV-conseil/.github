@@ -48,7 +48,7 @@ for key, command in cmd.items():
 # Read commit message
 with open(commit["commit_msg_filepath"], "r") as f:
     content = f.read()
-    # print("content", content)
+    print("content", content)
     sys.exit(0)
 
     "1. Block commits with no reference to an issue in the commit message"

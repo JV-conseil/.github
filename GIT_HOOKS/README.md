@@ -30,5 +30,3 @@ _source: <https://www.atlassian.com/git/tutorials/git-hooks>_
 - [Git hooks](https://www.atlassian.com/git/tutorials/git-hooks) - atlassian.com
 - [Customizing Git - Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) - git-scm.com
 - [How to avoid developers to commit without mention the issue on commit message on Github](https://stackoverflow.com/questions/13704498/how-to-avoid-developers-to-commit-without-mention-the-issue-on-commit-message-on) - stackoverflow.com
-
-T
