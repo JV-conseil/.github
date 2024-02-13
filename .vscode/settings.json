@@ -15,14 +15,14 @@
     "editor.codeActionsOnSave": {
       "source.organizeImports": "explicit"
     },
-    "editor.defaultFormatter": "ms-python.black-formatter",
-    "editor.rulers": [
-      88
-    ]
+    "editor.defaultFormatter": "ms-python.black-formatter"
   },
   "editor.bracketPairColorization.enabled": false,
   "editor.formatOnSave": true,
   "editor.matchBrackets": "always",
+  "editor.rulers": [
+    88
+  ],
   "editor.wordWrap": "on",
   "emmet.includeLanguages": {
     "django-html": "html"
@@ -36,7 +36,7 @@
     },
     "**/__pycache__": true,
     "**/lib": true,
-    "**/node_modules/**": true,
+    "**/node_modules/**": true
   },
   "html.format.indentHandlebars": true,
   "html.format.indentInnerHtml": true,
@@ -64,5 +64,5 @@
   "task.allowAutomaticTasks": "on",
   "terminal.integrated.defaultProfile.linux": "bash",
   "terminal.integrated.defaultProfile.osx": "bash",
-  "terminal.integrated.defaultProfile.windows": "bash",
+  "terminal.integrated.defaultProfile.windows": "bash"
 }

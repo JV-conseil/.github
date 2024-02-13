@@ -1,0 +1,40 @@
+[tool.black]
+line-length = 88
+
+[tool.pyright]
+exclude = [
+    ".vscode",
+    "**/__pycache__",
+    "**/node_modules",
+    "cache/**/*",
+    "/opt/homebrew/**/*",
+    "src/experimental",
+    "src/typestubs",
+    "typings",
+]
+
+# Configuring Ruff
+# see: https://docs.astral.sh/ruff/configuration/#__tabbed_1_1
+
+[tool.ruff]
+extend-exclude = ["cache", "homebrew"]
+
+[tool.ruff.lint]
+# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`) codes by default.
+# Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
+# McCabe complexity (`C901`) by default.
+select = ["E4", "E7", "E9", "F", "W"]
+ignore = []
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"]
+
+[tool.ruff.isort]
+known-first-party = ["django"]

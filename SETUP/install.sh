@@ -174,7 +174,9 @@ Done 🎉
 EOF
 }
 
-# If the script is sourced, return will return to the parent (of course), but if the script is executed, return will produce an error which gets hidden, and the script will continue execution.
+# If the script is sourced, return will return to the parent (of course), but if the
+# script is executed, return will produce an error which gets hidden, and the script
+# will continue execution.
 # return 2>/dev/null || :
 
 _jvcl_::main
