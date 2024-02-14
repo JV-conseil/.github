@@ -11,7 +11,12 @@
   "problemMatcher": [],
   "tasks": [
     {
-      "label": "Install Git hooks",
+      "label": "pipenv",
+      "command": ". ./.bash/pipenv.sh",
+      "detail": "Create & update virtual environment with pipenv"
+    },
+    {
+      "label": "git hooks install",
       "command": "./GIT_HOOKS/install.sh",
       "detail": "Install Git hooks"
     }
