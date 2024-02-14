@@ -12,7 +12,7 @@ Eventually, we will come up with a set of rules and guidelines. For now Panda sa
 <img src="https://github.com/ulynks/www/assets/8126807/645ea23b-c588-49b5-964d-f07d78015e0e" style="float:left;width:19%;margin:0;padding:0;" alt="Panda says You Break It, You Fix It!">
 </div>
 
-*You Break It, You Fix I* 🐼
+*You Break It, You Fix It* 🐼
 
 [Examples of contribution guidelines](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/setting-guidelines-for-repository-contributors#examples-of-contribution-guidelines) 🔗
 
