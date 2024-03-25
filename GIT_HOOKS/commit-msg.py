@@ -57,8 +57,9 @@ with open(commit["commit_msg_filepath"], "r") as f:
 
     """1. Allow automatic commit messages in the form of
     Merge branch 'dule-prod' of github.com:SDU-RIO-Explore/YERUN into dule-prod
+    Merge branch 'main' into aalborg
     """
-    merge_branch = re.compile(r"^Merge branch .+ of .+ into .+$")
+    merge_branch = re.compile(r"^Merge branch .+ into .+$")
     if re.search(merge_branch, commit_msg):
         # print(merge_branch)
         sys.exit(0)
