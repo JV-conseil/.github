@@ -25,6 +25,14 @@ _source: <https://www.atlassian.com/git/tutorials/git-hooks>_
 /opt/homebrew/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JV-conseil/.github/main/GIT_HOOKS/install.sh)"
 ```
 
+## Utils
+
+```bash
+while IFS= read -r _file; do
+  echo "${_file}" && cat "${_file}"
+done < <(find "${HOME}/GitHub" -type f -name "commit-msg")
+```
+
 ## Documentation 📚
 
 - [Git hooks](https://www.atlassian.com/git/tutorials/git-hooks) - atlassian.com
