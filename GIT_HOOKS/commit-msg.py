@@ -68,24 +68,25 @@ with open(commit["commit_msg_filepath"], "r") as f:
     issue_tag = re.compile(r"#[1-9]\d{,2}(?!\d)")
     if not re.search(issue_tag, commit_msg):
         print(
-            f"""Hi {commit["user"]}
+            f"""Hi {commit["user"]} 👋
 
-Your commit message must contains at least one reference
-to a GitHub issue e.g.:
+Your commit message must contains at least one reference to a GitHub issue 👇
 
 #123 Fix a Bug 🪲
 #123 #321 Fix a Bug 🪲
+ulynks/docs#38 Fix a Bug 🪲
 
-On GitHub Desktop in the commit Summary field, typing # (hashtag)
-will trigger suggestions of issues to reference.
+On GitHub Desktop in the commit Summary field, typing # (hashtag) will trigger
+suggestions of issues to reference.
 
 You can also pick one of the issues on GitHub
 {commit['github'][:-4]}/issues
 
-If no issue match your commit maybe creating one would be a
-good idea 😉
+You can point to another repo's issues as such
+owner/repo#digit e.g.: ulynks/docs#38 Fix a Bug 🪲
 
-Cheers 👋
+If no issue match your commit maybe creating one would be a good idea 😉
+
 """
         )
         sys.exit(1)
