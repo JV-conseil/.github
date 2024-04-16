@@ -52,7 +52,7 @@ for key, command in cmd.items():
 with open(commit["commit_msg_filepath"], "r") as f:
     commit_msg = f.read()
 
-    print("commit_msg", commit_msg)
+    # print("commit_msg", commit_msg)
     # sys.exit(0)
 
     """1. Allow automatic commit messages in the form of
