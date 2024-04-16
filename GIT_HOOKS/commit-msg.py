@@ -52,14 +52,18 @@ for key, command in cmd.items():
 with open(commit["commit_msg_filepath"], "r") as f:
     commit_msg = f.read()
 
-    # print("commit_msg", commit_msg)
+    print("commit_msg", commit_msg)
     # sys.exit(0)
 
     """1. Allow automatic commit messages in the form of
     Merge branch 'dule-prod' of github.com:SDU-RIO-Explore/YERUN into dule-prod
     Merge branch 'main' into aalborg
+    Merge branch 'main' into aalborg
+
+    # Conflicts:
+    #	callfinder/api/wp_draft/json_archive/budget_archive.json.gz
     """
-    merge_branch = re.compile(r"^Merge branch .+ into .+$")
+    merge_branch = re.compile(r"^Merge branch .+ into .+")
     if re.search(merge_branch, commit_msg):
         # print(merge_branch)
         sys.exit(0)
