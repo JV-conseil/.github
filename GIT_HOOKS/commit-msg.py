@@ -58,14 +58,14 @@ with open(commit["commit_msg_filepath"], "r") as f:
     """1. Allow automatic commit messages in the form of
     Merge branch 'dule-prod' of github.com:SDU-RIO-Explore/YERUN into dule-prod
     Merge branch 'main' into aalborg
-    Merge branch 'main' into aalborg
-
-    # Conflicts:
-    #	callfinder/api/wp_draft/json_archive/budget_archive.json.gz
     """
-    merge_branch = re.compile(r"^Merge branch .+ into .+")
-    if re.search(merge_branch, commit_msg):
-        # print(merge_branch)
+    for ok_msg in (
+        r"^Merge branch .+ into .+",
+        r"^Merge branch .+",
+    ):
+        merge_branch = re.compile(ok_msg)
+        if not re.search(merge_branch, commit_msg):
+            continue
         sys.exit(0)
 
     "2. Block commits with no reference to an issue in the commit message"
