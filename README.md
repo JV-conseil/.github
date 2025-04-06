@@ -13,7 +13,7 @@
 [![Django 4.1.7](https://img.shields.io/badge/Django-4-green)][Django]
 [![PostgreSQL 15](https://img.shields.io/badge/PostgreSQL-15-green.svg)][PostgreSQL]
 [![Python 3.12](https://img.shields.io/badge/Python-3.12-green)][Python]
-[![LinkedIn](https://img.shields.io/badge/Profile-blue?style=flat-square&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/vieillefont "LinkedIn Profile")
+[![LinkedIn](https://img.shields.io/badge/Profile-blue?style=flat-square&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/julien-vieillefont "LinkedIn Profile")
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 ![Bash](https://img.shields.io/badge/Bash-121011.svg?logo=gnu-bash&logoColor=white)
 ![Git](https://img.shields.io/badge/Git-F05033.svg?logo=git&logoColor=white)
